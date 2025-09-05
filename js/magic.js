@@ -13,18 +13,26 @@ const answersArr = [
     "wait and see."
 ];
 
-// function to get & display answer
+// function to get  answer from array & display it
 function getAnswer(){
 
     const min = 0;
     const max = answersArr.length - 1;
 
-    // random int function to get index of answer
+    // random int function to get array index of answer
     const randIndex = Math.floor(Math.random() * (max - min + 1)) + min;
     answer.innerHTML = answersArr[randIndex];
 }
 
 // click event listener to get answer
-ball.addEventListener("click", function(){
+ball.addEventListener("click", async function(){
+
+    // get user's question
+    const question = document.getElementById("user-question").trim();
+    if(!question){
+        answer.innerHTML = "you haven't entered a question...";
+        return; // exits click function/stops rest of script from executing if no question asked
+    }
+    
     getAnswer();
 });
