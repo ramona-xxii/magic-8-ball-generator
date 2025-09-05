@@ -13,6 +13,7 @@ const answersArr = [
     "wait and see."
 ];
 
+
 // function to get  answer from array & display it
 function getAnswer(){
 
@@ -24,6 +25,7 @@ function getAnswer(){
     answer.innerHTML = answersArr[randIndex];
 }
 
+
 // click event listener to get answer
 ball.addEventListener("click", async function(){
 
@@ -33,6 +35,14 @@ ball.addEventListener("click", async function(){
         answer.innerHTML = "you haven't entered a question...";
         return; // exits click function/stops rest of script from executing if no question asked
     }
+
+    // backend ai check
+    const isYesNo = await checkIfYesNoQuestion(question);
+
+    if(isYesNo){
+        getAnswer();
+    }else{
+        answer.innerHTML = "that's no a yes/no question...";
+    }
     
-    getAnswer();
 });
